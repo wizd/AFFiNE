@@ -84,9 +84,9 @@ AFFiNE.server.port = 3010;
 // /* Redis Plugin */
 // /* Provide caching and session storing backed by Redis. */
 // /* Useful when you deploy AFFiNE server in a cluster. */
-// AFFiNE.use('redis', {
-//   /* override options */
-// });
+AFFiNE.use('redis', {
+  /* override options */
+});
 //
 //
 // /* Payment Plugin */
@@ -153,16 +153,17 @@ AFFiNE.server.port = 3010;
 // });
 //
 // /* Copilot Plugin */
-// AFFiNE.use('copilot', {
-//   openai: {
-//     apiKey: 'your-key',
-//   },
-//   fal: {
-//     apiKey: 'your-key',
-//   },
-//   unsplashKey: 'your-key',
-//   storage: {
-//     provider: 'cloudflare-r2',
-//     bucket: 'copilot',
-//   }
-// })
+AFFiNE.use('copilot', {
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: process.env.OPENAI_BASE_URL,
+  },
+  fal: {
+    apiKey: 'your-key',
+  },
+  unsplashKey: 'your-key',
+  //   storage: {
+  //     provider: 'cloudflare-r2',
+  //     bucket: 'copilot',
+  //   },
+});
