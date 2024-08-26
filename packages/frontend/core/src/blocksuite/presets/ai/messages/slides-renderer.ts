@@ -85,6 +85,10 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
               contents: res.contents,
               images: res.images,
             });
+            // refresh loading menu item
+            getAIPanel(this.host)
+              .shadowRoot?.querySelector('ai-panel-answer')
+              ?.requestUpdate();
           }
         })
         .catch(console.error);
@@ -216,8 +220,6 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
     const collection = new DocCollection({
       schema,
       id: 'SLIDES_PREVIEW',
-      disableBacklinkIndex: true,
-      disableSearchIndex: true,
     });
     collection.meta.initialize();
     collection.start();

@@ -5,13 +5,14 @@
   "types": "index.d.ts",
   "napi": {
     "binaryName": "affine",
-    "triples": {
-      "additional": [
-        "aarch64-apple-darwin",
-        "aarch64-unknown-linux-gnu",
-        "aarch64-pc-windows-msvc"
-      ]
-    },
+    "targets": [
+      "x86_64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-pc-windows-msvc",
+      "aarch64-apple-darwin",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-pc-windows-msvc"
+    ],
     "ts": {
       "constEnum": false
     }
@@ -34,7 +35,7 @@
     }
   },
   "devDependencies": {
-    "@napi-rs/cli": "3.0.0-alpha.60",
+    "@napi-rs/cli": "3.0.0-alpha.62",
     "@types/node": "^20.12.7",
     "@types/uuid": "^10.0.0",
     "ava": "^6.1.2",

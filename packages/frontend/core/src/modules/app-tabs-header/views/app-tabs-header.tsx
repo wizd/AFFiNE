@@ -1,3 +1,4 @@
+// credits: tab overlay impl inspired by Figma desktop
 import {
   type DropTargetDropEvent,
   type DropTargetOptions,
@@ -132,6 +133,9 @@ const WorkbenchTab = ({
   );
   const onActivateView = useAsyncCallback(
     async (viewIdx: number) => {
+      if (viewIdx === activeViewIndex && tabActive) {
+        return;
+      }
       await tabsHeaderService.activateView?.(workbench.id, viewIdx);
       if (tabActive) {
         track.$.appTabsHeader.$.tabAction({
@@ -145,7 +149,7 @@ const WorkbenchTab = ({
         });
       }
     },
-    [tabActive, tabsHeaderService, workbench.id]
+    [activeViewIndex, tabActive, tabsHeaderService, workbench.id]
   );
   const handleAuxClick: MouseEventHandler = useCatchEventCallback(
     async e => {
@@ -208,7 +212,6 @@ const WorkbenchTab = ({
         data-testid="workbench-tab"
         data-active={tabActive}
         data-pinned={workbench.pinned}
-        data-padding-right={tabsLength > 1 && !workbench.pinned}
         className={styles.tab}
       >
         {workbench.views.map((view, viewIdx) => {
@@ -236,7 +239,11 @@ const WorkbenchTab = ({
                   )}
                 </div>
                 {workbench.pinned || !view.title ? null : (
-                  <div title={view.title} className={styles.splitViewLabelText}>
+                  <div
+                    title={view.title}
+                    className={styles.splitViewLabelText}
+                    data-padding-right={tabsLength > 1 && !workbench.pinned}
+                  >
                     {view.title}
                   </div>
                 )}
